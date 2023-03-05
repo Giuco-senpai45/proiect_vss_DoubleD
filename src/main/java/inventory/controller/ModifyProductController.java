@@ -242,11 +242,18 @@ public class ModifyProductController implements Initializable, Controller {
                 displayScene(event, "/fxml/MainScreen.fxml");
             }
         } catch (NumberFormatException e) {
-            System.out.println("Form contains blank field.");
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error Adding Product!");
-            alert.setHeaderText("Error!");
-            alert.setContentText("Form contains blank field.");
+//            System.out.println("Form contains blank field.");
+//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//            alert.setTitle("Error Adding Product!");
+//            alert.setHeaderText("Error!");
+//            alert.setContentText("Form contains blank field."); --- C07
+//            alert.showAndWait();
+
+            System.out.println("NumberFormatException thrown when modifying a product");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Modifying Product!");
+            alert.setHeaderText("Error");
+            alert.setContentText("Number fields from form are not properly filled.");
             alert.showAndWait();
         }
     }

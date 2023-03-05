@@ -22,7 +22,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AddProductController implements Initializable, Controller {
-    
+
     // Declare fields
     private Stage stage;
     private Parent scene;
@@ -31,7 +31,7 @@ public class AddProductController implements Initializable, Controller {
     private int productId;
 
     private InventoryService service;
-    
+
     @FXML
     private TextField minTxt;
 
@@ -119,13 +119,13 @@ public class AddProductController implements Initializable, Controller {
         stage.setScene(new Scene(scene));
         stage.show();
     }
-    
+
     /**
      * Method to add values of addParts to the bottom table view of the scene.
      */
     public void updateDeleteProductTableView() {
         deleteProductTableView.setItems(addParts);
-        
+
         deleteProductIdCol.setCellValueFactory(new PropertyValueFactory<>("partId"));
         deleteProductNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         deleteProductInventoryCol.setCellValueFactory(new PropertyValueFactory<>("inStock"));
@@ -134,7 +134,7 @@ public class AddProductController implements Initializable, Controller {
 
     /**
      * Ask user for confirmation before deleting selected part from current product.
-     * @param event 
+     * @param event
      */
     @FXML
     void handleDeleteProduct(ActionEvent event) {
@@ -176,11 +176,11 @@ public class AddProductController implements Initializable, Controller {
             System.out.println("Cancel clicked.");
         }
     }
-    
+
     /**
      * Add selected part from top table view to bottom table view in order to create
      * new product
-     * @param event 
+     * @param event
      */
     @FXML
     void handleAddProduct(ActionEvent event) {
@@ -203,7 +203,7 @@ public class AddProductController implements Initializable, Controller {
         String min = minTxt.getText();
         String max = maxTxt.getText();
         errorMessage = "";
-        
+
         try {
             errorMessage = Product.isValidProduct(name, Double.parseDouble(price), Integer.parseInt(inStock), Integer.parseInt(min), Integer.parseInt(max), addParts, errorMessage);
             if(errorMessage.length() > 0) {
@@ -217,11 +217,18 @@ public class AddProductController implements Initializable, Controller {
                 displayScene(event, "/fxml/MainScreen.fxml");
             }
         } catch (NumberFormatException e) {
-            System.out.println("Form contains blank field.");
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//            System.out.println("Form contains blank field.");
+//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//            alert.setTitle("Error Adding Product!");
+//            alert.setHeaderText("Error!");
+//            alert.setContentText("Form contains blank field."); --- C07
+//            alert.showAndWait();
+
+            System.out.println("NumberFormatException thrown when adding a product");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Adding Product!");
-            alert.setHeaderText("Error!");
-            alert.setContentText("Form contains blank field.");
+            alert.setHeaderText("Error");
+            alert.setContentText("Number fields from form are not properly filled.");
             alert.showAndWait();
         }
 
@@ -229,7 +236,7 @@ public class AddProductController implements Initializable, Controller {
 
     /**
      * Gets search text and inputs into lookupAssociatedPart method to highlight desired part
-     * @param event 
+     * @param event
      */
     @FXML
     void handleSearchProduct(ActionEvent event) {
@@ -238,5 +245,5 @@ public class AddProductController implements Initializable, Controller {
     }
 
 
-    
+
 }

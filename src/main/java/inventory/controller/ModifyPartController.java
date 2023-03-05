@@ -202,11 +202,18 @@ public class ModifyPartController implements Initializable, Controller {
             }
 
         } catch (NumberFormatException e) {
-            System.out.println("Blank Fields");
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error Adding Part!");
+//            System.out.println("Blank Fields");
+//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//            alert.setTitle("Error Adding Part!");
+//            alert.setHeaderText("Error");
+//            alert.setContentText("Form contains blank field."); --- C07
+//            alert.showAndWait();
+
+            System.out.println("NumberFormatException thrown when modifying a part");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Modifying Part!");
             alert.setHeaderText("Error");
-            alert.setContentText("Form contains blank field.");
+            alert.setContentText("Number fields from form are not properly filled.");
             alert.showAndWait();
         }
 
