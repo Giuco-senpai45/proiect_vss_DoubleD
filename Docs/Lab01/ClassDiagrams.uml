@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="127.13636363636365" y="377.1363636363637">netscape</node>
+    <node x="159.50000000000003" y="-79.13636363636365">META-INF</node>
+    <node x="414.00000000000006" y="51.77272727272725">javafx</node>
+    <node x="523.3181818181818" y="-95.5">org</node>
+    <node x="592.909090909091" y="309.95454545454527">inventory</node>
+    <node x="453.5454545454545" y="565.409090909091">images</node>
+    <node x="-80.5" y="-128.22727272727275">impl</node>
+    <node x="14.545454545454561" y="97.22727272727275">groovyjarjarasm</node>
+    <node x="-46.5" y="244.5">javax</node>
+    <node x="79.00000000000003" y="28.136363636363626">fxml</node>
+    <node x="246.0000000000001" y="684.5000000000002">toolbarButtonGraphics</node>
+    <node x="662.318181818182" y="420.5">groovyjarjarpicocli</node>
+    <node x="298.0000000000001" y="244.5">groovy</node>
+    <node x="-57.0" y="624.5000000000002">groovyjarjarantlr</node>
+    <node x="-12.5" y="348.1363636363637">jdk</node>
+    <node x="258.1818181818182" y="-186.40909090909093">java</node>
+    <node x="-105.13636363636363" y="-15.5">com</node>
+    <node x="221.0" y="446.31818181818187">sun</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic" zoom="0.5499999999999999" showDependencies="false" x="597.7272727272727" y="467.81818181818187" />
+  <SelectedNodes>
+    <node>images</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
