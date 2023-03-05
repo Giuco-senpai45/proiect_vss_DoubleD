@@ -34,9 +34,11 @@ public class InventoryRepository {
 			}
 			br.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+//			e.printStackTrace(); --- C08
+			System.out.println("There is no file with the name: " + filename);
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace(); --- C08
+			System.out.println("Error when trying to read from the file.");
 		}
 		inventory.setAllParts(listP);
 	}
@@ -87,9 +89,11 @@ public class InventoryRepository {
 			}
 			br.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+//			e.printStackTrace(); --- C08
+			System.out.println("There is no file with the name: " + filename);
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace(); --- C08
+			System.out.println("Error when trying to read from the file.");
 		}
 		inventory.setProducts(listP);
 	}
@@ -155,7 +159,8 @@ public class InventoryRepository {
 			}
 			bw.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace(); --- C08
+			System.out.println("Error when trying to write to file.");
 		}
 	}
 
