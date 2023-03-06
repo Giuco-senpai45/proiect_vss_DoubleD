@@ -139,11 +139,13 @@ public class MainScreenController implements Initializable,Controller {
         alert.setContentText("Are you sure you want to delete part " + part.getName() + " from parts?");
         Optional<ButtonType> result = alert.showAndWait();
 
-        if (result.get() == ButtonType.OK) {
-            System.out.println("Part deleted.");
-            service.deletePart(part);
-        } else {
-            System.out.println("Canceled part deletion.");
+        if(result.isPresent()) {
+            if (result.get() == ButtonType.OK) {
+                System.out.println("Part deleted.");
+                service.deletePart(part);
+            } else {
+                System.out.println("Canceled part deletion.");
+            }
         }
     }
 
@@ -161,12 +163,13 @@ public class MainScreenController implements Initializable,Controller {
         alert.setHeaderText("Confirm Product Deletion?");
         alert.setContentText("Are you sure you want to delete product " + product.getName() + " from products?");
         Optional<ButtonType> result = alert.showAndWait();
-        
-        if (result.get() == ButtonType.OK) {
-            service.deleteProduct(product);
-            System.out.println("Product " + product.getName() + " was removed.");
-        } else {
-            System.out.println("Product " + product.getName() + " was not removed.");
+        if(result.isPresent()) {
+            if (result.get() == ButtonType.OK) {
+                service.deleteProduct(product);
+                System.out.println("Product " + product.getName() + " was removed.");
+            } else {
+                System.out.println("Product " + product.getName() + " was not removed.");
+            }
         }
     }
 
@@ -229,11 +232,13 @@ public class MainScreenController implements Initializable,Controller {
         alert.setHeaderText("Confirm Exit");
         alert.setContentText("Are you sure you want to exit?");
         Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == ButtonType.OK) {
-            System.out.println("Ok selected. Program exited");
-            System.exit(0);
-        } else {
-            System.out.println("Cancel clicked.");
+        if(result.isPresent()) {
+            if (result.get() == ButtonType.OK) {
+                System.out.println("Ok selected. Program exited");
+                System.exit(0);
+            } else {
+                System.out.println("Cancel clicked.");
+            }
         }
     }
 

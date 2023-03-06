@@ -23,16 +23,13 @@ public class InventoryRepository {
 		//ClassLoader classLoader = InventoryRepository.class.getClassLoader();
 		File file = new File(filename);
 		ObservableList<Part> listP = FXCollections.observableArrayList();
-		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new FileReader(file));
+		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
 			String line = null;
 			while((line=br.readLine())!=null){
 				Part part=getPartFromString(line);
 				if (part!=null)
 					listP.add(part);
 			}
-			br.close();
 		} catch (FileNotFoundException e) {
 //			e.printStackTrace(); --- C08
 			System.out.println("There is no file with the name: " + filename);
@@ -78,9 +75,7 @@ public class InventoryRepository {
 		File file = new File(filename);
 
 		ObservableList<Product> listP = FXCollections.observableArrayList();
-		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new FileReader(file));
+		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
 			String line = null;
 			while((line=br.readLine())!=null){
 				Product product=getProductFromString(line);
@@ -132,12 +127,10 @@ public class InventoryRepository {
 		//ClassLoader classLoader = InventoryRepository.class.getClassLoader();
 		File file = new File(filename);
 
-		BufferedWriter bw = null;
 		ObservableList<Part> parts=inventory.getAllParts();
 		ObservableList<Product> products=inventory.getProducts();
 
-		try {
-			bw = new BufferedWriter(new FileWriter(file));
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
 			for (Part p:parts) {
 				System.out.println(p.toString());
 				bw.write(p.toString());

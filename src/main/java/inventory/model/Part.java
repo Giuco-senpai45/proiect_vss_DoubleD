@@ -13,7 +13,7 @@ public abstract class Part {
     private int max;
     
     // Constructor
-    public Part(int partId, String name, double price, int inStock, int min, int max) {
+    protected Part(int partId, String name, double price, int inStock, int min, int max) {
         this.partId = partId;
         this.name = name;
         this.price = price;

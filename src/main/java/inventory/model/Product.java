@@ -58,7 +58,7 @@ public class Product {
     
     // Setters
     public void setAssociatedParts(ObservableList<Part> associatedParts) {
-        associatedParts = associatedParts;
+        this.associatedParts = associatedParts;
     }
 
     public void setProductId(int productId) {
@@ -139,7 +139,7 @@ public class Product {
         if(inStock > max) {
             errorMessage += "Inventory level is higher than the maximum value. ";
         }
-        if (parts.size() < 1) {
+        if (parts.isEmpty()) {
             errorMessage += "Product must contain at least 1 part. ";
         }
         if (sumOfParts > price) {

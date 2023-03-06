@@ -159,11 +159,14 @@ public class ModifyPartController implements Initializable, Controller {
         alert.setHeaderText("Confirm Cancellation");
         alert.setContentText("Are you sure you want to cancel modifying part " + nameTxt.getText() + "?");
         Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == ButtonType.OK) {
-            System.out.println("Ok selected. Part modification cancelled.");
-            displayScene(event, "/fxml/MainScreen.fxml");
-        } else {
-            System.out.println("Cancel clicked. Please complete part modification.");
+
+        if(result.isPresent()) {
+            if(result.get() == ButtonType.OK) {
+                System.out.println("Ok selected. Part modification cancelled.");
+                displayScene(event, "/fxml/MainScreen.fxml");
+            } else {
+                System.out.println("Cancel clicked. Please complete part modification.");
+            }
         }
     }
 
