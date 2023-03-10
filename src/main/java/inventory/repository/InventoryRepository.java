@@ -46,26 +46,36 @@ public class InventoryRepository {
 		StringTokenizer st=new StringTokenizer(line, ",");
 		String type=st.nextToken();
 		if (type.equals("I")) {
-			int id= Integer.parseInt(st.nextToken());
-			inventory.setAutoPartId(id);
-			String name= st.nextToken();
-			double price = Double.parseDouble(st.nextToken());
-			int inStock = Integer.parseInt(st.nextToken());
-			int minStock = Integer.parseInt(st.nextToken());
-			int maxStock = Integer.parseInt(st.nextToken());
-			int idMachine= Integer.parseInt(st.nextToken());
-			item = new InhousePart(id, name, price, inStock, minStock, maxStock, idMachine);
+			try{
+				int id= Integer.parseInt(st.nextToken());
+				inventory.setAutoPartId(id);
+				String name= st.nextToken();
+				double price = Double.parseDouble(st.nextToken());
+				int inStock = Integer.parseInt(st.nextToken());
+				int minStock = Integer.parseInt(st.nextToken());
+				int maxStock = Integer.parseInt(st.nextToken());
+				int idMachine= Integer.parseInt(st.nextToken());
+				item = new InhousePart(id, name, price, inStock, minStock, maxStock, idMachine);
+			}
+			catch(NumberFormatException e) {
+				System.out.println("The line <" + line + "> from file doesn't represent a part");
+			}
 		}
 		if (type.equals("O")) {
-			int id= Integer.parseInt(st.nextToken());
-			inventory.setAutoPartId(id);
-			String name= st.nextToken();
-			double price = Double.parseDouble(st.nextToken());
-			int inStock = Integer.parseInt(st.nextToken());
-			int minStock = Integer.parseInt(st.nextToken());
-			int maxStock = Integer.parseInt(st.nextToken());
-			String company=st.nextToken();
-			item = new OutsourcedPart(id, name, price, inStock, minStock, maxStock, company);
+			try {
+				int id = Integer.parseInt(st.nextToken());
+				inventory.setAutoPartId(id);
+				String name = st.nextToken();
+				double price = Double.parseDouble(st.nextToken());
+				int inStock = Integer.parseInt(st.nextToken());
+				int minStock = Integer.parseInt(st.nextToken());
+				int maxStock = Integer.parseInt(st.nextToken());
+				String company = st.nextToken();
+				item = new OutsourcedPart(id, name, price, inStock, minStock, maxStock, company);
+			}
+			catch(NumberFormatException e) {
+				System.out.println("The line <" + line + "> from file doesn't represent a part");
+			}
 		}
 		return item;
 	}
@@ -99,25 +109,30 @@ public class InventoryRepository {
 		StringTokenizer st=new StringTokenizer(line, ",");
 		String type=st.nextToken();
 		if (type.equals("P")) {
-			int id= Integer.parseInt(st.nextToken());
-			inventory.setAutoProductId(id);
-			String name= st.nextToken();
-			double price = Double.parseDouble(st.nextToken());
-			int inStock = Integer.parseInt(st.nextToken());
-			int minStock = Integer.parseInt(st.nextToken());
-			int maxStock = Integer.parseInt(st.nextToken());
-			String partIDs=st.nextToken();
+			try {
+				int id = Integer.parseInt(st.nextToken());
+				inventory.setAutoProductId(id);
+				String name = st.nextToken();
+				double price = Double.parseDouble(st.nextToken());
+				int inStock = Integer.parseInt(st.nextToken());
+				int minStock = Integer.parseInt(st.nextToken());
+				int maxStock = Integer.parseInt(st.nextToken());
+				String partIDs = st.nextToken();
 
-			StringTokenizer ids= new StringTokenizer(partIDs,":");
-			ObservableList<Part> list= FXCollections.observableArrayList();
-			while (ids.hasMoreTokens()) {
-				String idP = ids.nextToken();
-				Part part = inventory.lookupPart(idP);
-				if (part != null)
-					list.add(part);
+				StringTokenizer ids = new StringTokenizer(partIDs, ":");
+				ObservableList<Part> list = FXCollections.observableArrayList();
+				while (ids.hasMoreTokens()) {
+					String idP = ids.nextToken();
+					Part part = inventory.lookupPart(idP);
+					if (part != null)
+						list.add(part);
+				}
+				product = new Product(id, name, price, inStock, minStock, maxStock, list);
+				product.setAssociatedParts(list);
 			}
-			product = new Product(id, name, price, inStock, minStock, maxStock, list);
-			product.setAssociatedParts(list);
+			catch(NumberFormatException e) {
+				System.out.println("The line <" + line + "> from file doesn't represent a product");
+			}
 		}
 		return product;
 	}

@@ -42,16 +42,16 @@ public class Inventory {
      * @return 
      */
     public Product lookupProduct(String searchItem) {
-//        boolean isFound = false;
+        boolean isFound = false;
         for(Product p: products) {
 //            if(p.getName().contains(searchItem) || (p.getProductId()+"").equals(searchItem)) return p; --- C01
             if(p.getName().contains(searchItem)) return p;
-//            isFound = true;
+            isFound = true;
         }
-//        if(isFound == false) { --- C01
-//            Product product = new Product(0, null, 0.0, 0, 0, 0, null);
-//            return product;
-//        }
+        if(isFound == false) {
+            Product product = new Product(0, null, 0.0, 0, 0, 0, null);
+            return product;
+        }
         return null;
     }
     
