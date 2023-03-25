@@ -10,11 +10,12 @@ import java.util.StringTokenizer;
 
 public class InventoryRepository {
 
-	private static String filename = "data/items.txt";
+	private final String filename;
 	private Inventory inventory;
 
-	public InventoryRepository(){
+	public InventoryRepository(String filename){
 		this.inventory=new Inventory();
+		this.filename = filename;
 		readParts();
 		readProducts();
 	}
