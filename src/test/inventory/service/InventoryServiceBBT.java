@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class InventoryServiceTest {
+public class InventoryServiceBBT {
 
     private static final int STOC = 5;
     private static final int MIN = 2;

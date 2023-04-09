@@ -98,13 +98,25 @@ public class Inventory {
      * @return 
      */
     public Part lookupPart(String searchItem) {
-        for(Part p:allParts) {
-//            if(p.getName().contains(searchItem) || (p.getPartId()+"").equals(searchItem)) return p; --- C01
-            if(p.getName().contains(searchItem)) return p;
+        if(searchItem.length() > 0)
+        {
+            if(searchItem.length() == 1)
+            {
+                for(Part p:allParts) {
+                    if(p.getName().charAt(0) == searchItem.charAt(0))
+                        return p;
+                }
+            }
+            else {
+                for(Part p:allParts) {
+                    if(p.getName().contains(searchItem))
+                        return p;
+                }
+            }
         }
         return null;
     }
-    
+
     /**
      * Update part at given index
      * @param index
