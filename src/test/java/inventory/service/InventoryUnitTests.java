@@ -26,21 +26,18 @@ public class InventoryUnitTests {
     private static final double PRICE = 12.5;
     private static final String NAME = "InhousePart";
 
-    @Nested
+    @Test
     @DisplayName("Unit Tests for Entity - InhousePart")
-    class EntityUnitTests {
-        @Test
-        void testInhousePartConstructor() {
-            InhousePart inhousePart = new InhousePart(234, NAME, PRICE, STOC, MIN, MAX, MASINA_ID);
+    void testInhousePartConstructor() {
+        InhousePart inhousePart = new InhousePart(234, NAME, PRICE, STOC, MIN, MAX, MASINA_ID);
 
-            assertEquals(234, inhousePart.getPartId());
-            assertEquals(NAME, inhousePart.getName());
-            assertEquals(PRICE, inhousePart.getPrice());
-            assertEquals(STOC, inhousePart.getInStock());
-            assertEquals(MIN, inhousePart.getMin());
-            assertEquals(MAX, inhousePart.getMax());
-            assertEquals(MASINA_ID, inhousePart.getMachineId());
-        }
+        assertEquals(234, inhousePart.getPartId());
+        assertEquals(NAME, inhousePart.getName());
+        assertEquals(PRICE, inhousePart.getPrice());
+        assertEquals(STOC, inhousePart.getInStock());
+        assertEquals(MIN, inhousePart.getMin());
+        assertEquals(MAX, inhousePart.getMax());
+        assertEquals(MASINA_ID, inhousePart.getMachineId());
     }
 
     @Nested
