@@ -10,227 +10,232 @@ import java.util.StringTokenizer;
 
 public class InventoryRepository {
 
-	private final String filename;
-	private Inventory inventory;
+    private final String filename;
+    private Inventory inventory;
 
-	public InventoryRepository(String filename){
-		this.inventory=new Inventory();
-		this.filename = filename;
-		readParts();
-		readProducts();
-	}
+    public InventoryRepository(String filename) {
+        this.inventory = new Inventory();
+        this.filename = filename;
+        readParts();
+        readProducts();
+    }
 
-	public void readParts(){
-		//ClassLoader classLoader = InventoryRepository.class.getClassLoader();
-		File file = new File(filename);
-		ObservableList<Part> listP = FXCollections.observableArrayList();
-		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
-			String line = null;
-			while((line=br.readLine())!=null){
-				Part part=getPartFromString(line);
-				if (part!=null)
-					listP.add(part);
-			}
-		} catch (FileNotFoundException e) {
+    public InventoryRepository(String filename, Inventory inventory) {
+        this.inventory = inventory;
+        this.filename = filename;
+        readParts();
+        readProducts();
+    }
+
+    public void readParts() {
+        //ClassLoader classLoader = InventoryRepository.class.getClassLoader();
+        File file = new File(filename);
+        ObservableList<Part> listP = FXCollections.observableArrayList();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                Part part = getPartFromString(line);
+                if (part != null)
+                    listP.add(part);
+            }
+        } catch (FileNotFoundException e) {
 //			e.printStackTrace(); --- C04
-			System.out.println("There is no file with the name: " + filename);
-		} catch (IOException e) {
+            System.out.println("There is no file with the name: " + filename);
+        } catch (IOException e) {
 //			e.printStackTrace(); --- C04
-			System.out.println("Error when trying to read from the file.");
-		}
-		inventory.setAllParts(listP);
-	}
+            System.out.println("Error when trying to read from the file.");
+        }
+        inventory.setAllParts(listP);
+    }
 
-	private Part getPartFromString(String line){
-		Part item=null;
-		if (line==null|| line.equals("")) return null;
-		StringTokenizer st=new StringTokenizer(line, ",");
-		String type=st.nextToken();
-		if (type.equals("I")) {
-			try{
-				int id= Integer.parseInt(st.nextToken());
-				inventory.setAutoPartId(id);
-				String name= st.nextToken();
-				double price = Double.parseDouble(st.nextToken());
-				int inStock = Integer.parseInt(st.nextToken());
-				int minStock = Integer.parseInt(st.nextToken());
-				int maxStock = Integer.parseInt(st.nextToken());
-				int idMachine= Integer.parseInt(st.nextToken());
-				item = new InhousePart(id, name, price, inStock, minStock, maxStock, idMachine);
-			}
-			catch(NumberFormatException e) {
-				System.out.println("The line <" + line + "> from file doesn't represent a part");
-			}
-		}
-		if (type.equals("O")) {
-			try {
-				int id = Integer.parseInt(st.nextToken());
-				inventory.setAutoPartId(id);
-				String name = st.nextToken();
-				double price = Double.parseDouble(st.nextToken());
-				int inStock = Integer.parseInt(st.nextToken());
-				int minStock = Integer.parseInt(st.nextToken());
-				int maxStock = Integer.parseInt(st.nextToken());
-				String company = st.nextToken();
-				item = new OutsourcedPart(id, name, price, inStock, minStock, maxStock, company);
-			}
-			catch(NumberFormatException e) {
-				System.out.println("The line <" + line + "> from file doesn't represent a part");
-			}
-		}
-		return item;
-	}
+    private Part getPartFromString(String line) {
+        Part item = null;
+        if (line == null || line.equals("")) return null;
+        StringTokenizer st = new StringTokenizer(line, ",");
+        String type = st.nextToken();
+        if (type.equals("I")) {
+            try {
+                int id = Integer.parseInt(st.nextToken());
+                inventory.setAutoPartId(id);
+                String name = st.nextToken();
+                double price = Double.parseDouble(st.nextToken());
+                int inStock = Integer.parseInt(st.nextToken());
+                int minStock = Integer.parseInt(st.nextToken());
+                int maxStock = Integer.parseInt(st.nextToken());
+                int idMachine = Integer.parseInt(st.nextToken());
+                item = new InhousePart(id, name, price, inStock, minStock, maxStock, idMachine);
+            } catch (NumberFormatException e) {
+                System.out.println("The line <" + line + "> from file doesn't represent a part");
+            }
+        }
+        if (type.equals("O")) {
+            try {
+                int id = Integer.parseInt(st.nextToken());
+                inventory.setAutoPartId(id);
+                String name = st.nextToken();
+                double price = Double.parseDouble(st.nextToken());
+                int inStock = Integer.parseInt(st.nextToken());
+                int minStock = Integer.parseInt(st.nextToken());
+                int maxStock = Integer.parseInt(st.nextToken());
+                String company = st.nextToken();
+                item = new OutsourcedPart(id, name, price, inStock, minStock, maxStock, company);
+            } catch (NumberFormatException e) {
+                System.out.println("The line <" + line + "> from file doesn't represent a part");
+            }
+        }
+        return item;
+    }
 
-	public void readProducts(){
-		//ClassLoader classLoader = InventoryRepository.class.getClassLoader();
-		File file = new File(filename);
+    public void readProducts() {
+        //ClassLoader classLoader = InventoryRepository.class.getClassLoader();
+        File file = new File(filename);
 
-		ObservableList<Product> listP = FXCollections.observableArrayList();
-		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
-			String line = null;
-			while((line=br.readLine())!=null){
-				Product product=getProductFromString(line);
-				if (product!=null)
-					listP.add(product);
-			}
-			br.close();
-		} catch (FileNotFoundException e) {
+        ObservableList<Product> listP = FXCollections.observableArrayList();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                Product product = getProductFromString(line);
+                if (product != null)
+                    listP.add(product);
+            }
+            br.close();
+        } catch (FileNotFoundException e) {
 //			e.printStackTrace(); --- C04
-			System.out.println("There is no file with the name: " + filename);
-		} catch (IOException e) {
+            System.out.println("There is no file with the name: " + filename);
+        } catch (IOException e) {
 //			e.printStackTrace(); --- C04
-			System.out.println("Error when trying to read from the file.");
-		}
-		inventory.setProducts(listP);
-	}
+            System.out.println("Error when trying to read from the file.");
+        }
+        inventory.setProducts(listP);
+    }
 
-	private Product getProductFromString(String line){
-		Product product=null;
-		if (line==null|| line.equals("")) return null;
-		StringTokenizer st=new StringTokenizer(line, ",");
-		String type=st.nextToken();
-		if (type.equals("P")) {
-			try {
-				int id = Integer.parseInt(st.nextToken());
-				inventory.setAutoProductId(id);
-				String name = st.nextToken();
-				double price = Double.parseDouble(st.nextToken());
-				int inStock = Integer.parseInt(st.nextToken());
-				int minStock = Integer.parseInt(st.nextToken());
-				int maxStock = Integer.parseInt(st.nextToken());
-				String partIDs = st.nextToken();
+    private Product getProductFromString(String line) {
+        Product product = null;
+        if (line == null || line.equals("")) return null;
+        StringTokenizer st = new StringTokenizer(line, ",");
+        String type = st.nextToken();
+        if (type.equals("P")) {
+            try {
+                int id = Integer.parseInt(st.nextToken());
+                inventory.setAutoProductId(id);
+                String name = st.nextToken();
+                double price = Double.parseDouble(st.nextToken());
+                int inStock = Integer.parseInt(st.nextToken());
+                int minStock = Integer.parseInt(st.nextToken());
+                int maxStock = Integer.parseInt(st.nextToken());
+                String partIDs = st.nextToken();
 
-				StringTokenizer ids = new StringTokenizer(partIDs, ":");
-				ObservableList<Part> list = FXCollections.observableArrayList();
-				while (ids.hasMoreTokens()) {
-					String idP = ids.nextToken();
-					Part part = inventory.lookupPart(idP);
-					if (part != null)
-						list.add(part);
-				}
-				product = new Product(id, name, price, inStock, minStock, maxStock, list);
-				product.setAssociatedParts(list);
-			}
-			catch(NumberFormatException e) {
-				System.out.println("The line <" + line + "> from file doesn't represent a product");
-			}
-		}
-		return product;
-	}
+                StringTokenizer ids = new StringTokenizer(partIDs, ":");
+                ObservableList<Part> list = FXCollections.observableArrayList();
+                while (ids.hasMoreTokens()) {
+                    String idP = ids.nextToken();
+                    Part part = inventory.lookupPart(idP);
+                    if (part != null)
+                        list.add(part);
+                }
+                product = new Product(id, name, price, inStock, minStock, maxStock, list);
+                product.setAssociatedParts(list);
+            } catch (NumberFormatException e) {
+                System.out.println("The line <" + line + "> from file doesn't represent a product");
+            }
+        }
+        return product;
+    }
 
-	public void writeAll() {
+    public void writeAll() {
 
-		//ClassLoader classLoader = InventoryRepository.class.getClassLoader();
-		File file = new File(filename);
+        //ClassLoader classLoader = InventoryRepository.class.getClassLoader();
+        File file = new File(filename);
 
-		ObservableList<Part> parts=inventory.getAllParts();
-		ObservableList<Product> products=inventory.getProducts();
+        ObservableList<Part> parts = inventory.getAllParts();
+        ObservableList<Product> products = inventory.getProducts();
 
-		try(BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-			for (Part p:parts) {
-				System.out.println(p.toString());
-				bw.write(p.toString());
-				bw.newLine();
-			}
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            for (Part p : parts) {
+                System.out.println(p.toString());
+                bw.write(p.toString());
+                bw.newLine();
+            }
 
-			for (Product pr:products) {
-				String line=pr.toString()+",";
-				ObservableList<Part> list= pr.getAssociatedParts();
-				int index=0;
-				while(index<list.size()-1){
-					line=line+list.get(index).getPartId()+":";
-					index++;
-				}
-				if (index==list.size()-1)
-					line=line+list.get(index).getPartId();
-				bw.write(line);
-				bw.newLine();
-			}
-			bw.close();
-		} catch (IOException e) {
+            for (Product pr : products) {
+                String line = pr.toString() + ",";
+                ObservableList<Part> list = pr.getAssociatedParts();
+                int index = 0;
+                while (index < list.size() - 1) {
+                    line = line + list.get(index).getPartId() + ":";
+                    index++;
+                }
+                if (index == list.size() - 1)
+                    line = line + list.get(index).getPartId();
+                bw.write(line);
+                bw.newLine();
+            }
+            bw.close();
+        } catch (IOException e) {
 //			e.printStackTrace(); --- C04
-			System.out.println("Error when trying to write to file.");
-		}
-	}
+            System.out.println("Error when trying to write to file.");
+        }
+    }
 
-	public void addPart(Part part){
-		inventory.addPart(part);
-		writeAll();
-	}
+    public void addPart(Part part) {
+        inventory.addPart(part);
+        writeAll();
+    }
 
-	public void addProduct(Product product){
-		inventory.addProduct(product);
-		writeAll();
-	}
+    public void addProduct(Product product) {
+        inventory.addProduct(product);
+        writeAll();
+    }
 
-	public int getAutoPartId(){
-		return inventory.getAutoPartId();
-	}
+    public int getAutoPartId() {
+        return inventory.getAutoPartId();
+    }
 
-	public int getAutoProductId(){
-		return inventory.getAutoProductId();
-	}
+    public int getAutoProductId() {
+        return inventory.getAutoProductId();
+    }
 
-	public ObservableList<Part> getAllParts(){
-		return inventory.getAllParts();
-	}
+    public ObservableList<Part> getAllParts() {
+        return inventory.getAllParts();
+    }
 
-	public ObservableList<Product> getAllProducts(){
-		return inventory.getProducts();
-	}
+    public ObservableList<Product> getAllProducts() {
+        return inventory.getProducts();
+    }
 
-	public Part lookupPart (String search){
-		return inventory.lookupPart(search);
-	}
+    public Part lookupPart(String search) {
+        return inventory.lookupPart(search);
+    }
 
-	public Product lookupProduct (String search){
-		return inventory.lookupProduct(search);
-	}
+    public Product lookupProduct(String search) {
+        return inventory.lookupProduct(search);
+    }
 
-	public void updatePart(int partIndex, Part part){
-		inventory.updatePart(partIndex, part);
-		writeAll();
-	}
+    public void updatePart(int partIndex, Part part) {
+        inventory.updatePart(partIndex, part);
+        writeAll();
+    }
 
-	public void updateProduct(int productIndex, Product product){
-		inventory.updateProduct(productIndex, product);
-		writeAll();
-	}
+    public void updateProduct(int productIndex, Product product) {
+        inventory.updateProduct(productIndex, product);
+        writeAll();
+    }
 
-	public void deletePart(Part part){
-		inventory.deletePart(part);
-		writeAll();
-	}
-	public void deleteProduct(Product product){
-		inventory.removeProduct(product);
-		writeAll();
-	}
+    public void deletePart(Part part) {
+        inventory.deletePart(part);
+        writeAll();
+    }
 
-	public Inventory getInventory(){
-		return inventory;
-	}
+    public void deleteProduct(Product product) {
+        inventory.removeProduct(product);
+        writeAll();
+    }
 
-	public void setInventory(Inventory inventory){
-		this.inventory=inventory;
-	}
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
 }
