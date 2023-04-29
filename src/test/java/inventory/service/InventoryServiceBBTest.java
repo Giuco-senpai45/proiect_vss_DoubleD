@@ -1,6 +1,7 @@
 package inventory.service;
 
 import inventory.repository.InventoryRepository;
+import inventory.service.InventoryService;
 import org.junit.jupiter.api.*;
 
 import java.io.BufferedWriter;
@@ -10,7 +11,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class InventoryServiceBBT {
+public class InventoryServiceBBTest {
 
     private static final int STOC = 5;
     private static final int MIN = 2;
@@ -41,7 +42,7 @@ public class InventoryServiceBBT {
     @Tag("inhousePart")
     @Tag("price")
     @Tag("name")
-    void addInhousePartValid_TC1_ECP() {
+    void testAddInhousePartValid_TC1_ECP() {
         // Arrange
         String validName = "InhousePart";
         double validPrice = 23.05;
@@ -56,7 +57,7 @@ public class InventoryServiceBBT {
     @Tag("ECP")
     @Tag("inhousePart")
     @Tag("name")
-    void addInhousePartInvalid_TC2_ECP() {
+    void testAddInhousePartInvalid_TC2_ECP() {
         String invalidName = "";
         double validPrice = 23.05;
         try {

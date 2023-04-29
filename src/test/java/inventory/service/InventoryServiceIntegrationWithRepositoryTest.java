@@ -5,7 +5,6 @@ import inventory.model.Part;
 import inventory.repository.InventoryRepository;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedWriter;
@@ -15,7 +14,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class InventoryServiceIntegrationWithRepository {
+public class InventoryServiceIntegrationWithRepositoryTest {
     private static final String NUME = "CevaNume";
     private static final double PRET = 23.32;
     private static final int STOC = 5;

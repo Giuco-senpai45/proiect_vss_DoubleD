@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class InventoryServiceWBT {
+public class InventoryServiceWBTest {
     private static final int STOC = 5;
     private static final int MIN = 2;
     private static final int MAX = 7;
