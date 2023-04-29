@@ -41,35 +41,35 @@ public class InventoryServiceWBTest {
     }
 
     @Test
-    void lookupPart_TC1() {
+    void testLookupPart_TC1() {
         String name = "";
         Part foundPart = service.lookupPart(name);
         assert foundPart == null;
     }
 
     @Test
-    void lookupPart_TC2() {
+    void testLookupPart_TC2() {
         String name = "a";
         Part foundPart = service.lookupPart(name);
         assert foundPart.getPartId() == part.getPartId();
     }
 
     @Test
-    void lookupPart_TC3() {
+    void testLookupPart_TC3() {
         String name = "x";
         Part foundPart = service.lookupPart(name);
         assert foundPart == null;
     }
 
     @Test
-    void lookupPart_TC4() {
+    void testLookupPart_TC4() {
         String name = "api";
         Part foundPart = service.lookupPart(name);
         assert foundPart.getPartId() == part.getPartId();
     }
 
     @Test
-    void lookupPart_TC5() {
+    void testLookupPart_TC5() {
         String name = "xyz";
         Part foundPart = service.lookupPart(name);
         assert foundPart == null;

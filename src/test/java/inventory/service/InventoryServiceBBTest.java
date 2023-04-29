@@ -73,7 +73,7 @@ public class InventoryServiceBBTest {
     @Tag("ECP")
     @Tag("inhousePart")
     @Tag("price")
-    void addInhousePartInvalid_TC3_ECP() {
+    void testaddInhousePartInvalid_TC3_ECP() {
         String validName = "InhousePart";
         double invaldPrice = 0;
         try {
@@ -89,7 +89,7 @@ public class InventoryServiceBBTest {
     @Tag("BVA")
     @Tag("inhousePart")
     @Tag("name")
-    void addInhousePartValid_TC3_BVA() {
+    void testAddInhousePartValid_TC3_BVA() {
         String validName = "P";
         double validPrice = 23.05;
         service.addInhousePart(validName, validPrice, STOC, MIN, MAX, MASINA_ID);
@@ -101,7 +101,7 @@ public class InventoryServiceBBTest {
     @Tag("BVA")
     @Tag("inhousePart")
     @Tag("name")
-    void addInhousePartValid_TC4_BVA() {
+    void testAddInhousePartValid_TC4_BVA() {
         String validName = "P...................................................................................." +
                 "..................................................................................." +
                 "....................................................................................123";
@@ -115,7 +115,7 @@ public class InventoryServiceBBTest {
     @Tag("BVA")
     @Tag("inhousePart")
     @Tag("name")
-    void addInhousePartValid_TC5_BVA() {
+    void testAddInhousePartValid_TC5_BVA() {
         String validName = "P...................................................................................." +
                 "..................................................................................." +
                 "....................................................................................12";
@@ -129,7 +129,7 @@ public class InventoryServiceBBTest {
     @Tag("BVA")
     @Tag("inhousePart")
     @Tag("price")
-    void addInhousePartValid_TC8_BVA() {
+    void testAddInhousePartValid_TC8_BVA() {
         String validName = "P";
         double validPrice = 0.01;
         service.addInhousePart(validName, validPrice, STOC, MIN, MAX, MASINA_ID);
@@ -141,7 +141,7 @@ public class InventoryServiceBBTest {
     @Tag("BVA")
     @Tag("inhousePart")
     @Tag("price")
-    void addInhousePartInvalid_TC9_BVA() {
+    void testAddInhousePartInvalid_TC9_BVA() {
         String validName = "P";
         double invalidPrice = -0.01;
         try {
@@ -159,7 +159,7 @@ public class InventoryServiceBBTest {
         @Tag("BVA")
         @Tag("inhousePart")
         @Tag("price")
-        void addInhousePartValid_TC10_BVA() {
+        void testAddInhousePartValid_TC10_BVA() {
             String validName = "P";
             double validPrice = Double.MAX_VALUE;
             service.addInhousePart(validName, validPrice, STOC, MIN, MAX, MASINA_ID);
@@ -170,7 +170,7 @@ public class InventoryServiceBBTest {
         @Tag("BVA")
         @Tag("inhousePart")
         @Tag("price")
-        void addInhousePartValid_TC11_BVA() {
+        void testAddInhousePartValid_TC11_BVA() {
             String validName = "P";
             double validPrice = Double.MAX_VALUE - 0.01;
             service.addInhousePart(validName, validPrice, STOC, MIN, MAX, MASINA_ID);
@@ -182,7 +182,7 @@ public class InventoryServiceBBTest {
         @Tag("inhousePart")
         @Tag("price")
         @Timeout(2)
-        void addInhousePartValid_TC12_BVA() {
+        void testAddInhousePartValid_TC12_BVA() {
             String validName = "P";
             double validPrice = Double.MAX_VALUE + 0.01;
             service.addInhousePart(validName, validPrice, STOC, MIN, MAX, MASINA_ID);
